@@ -6,9 +6,9 @@
 char Arr[16][13]= {"Sindang", "Wangsimni", "Ttukseom", "Jamsillaru", "Jamsil", "Samseong", "Yeoksam", "Gangnam", "Seocho", "Nakseongdae", "Bangbae", "Bongcheon", "Dangsan", "Hapjeong", "Ahyeon", "Chungjeongno"};
 
 void printchar(void);//문자열 출력
-void ascending(void); //오름차순 출력함수
-void descending(void); //내림차순 출력함수
-void swap(int);
+void ascending(void); //오름차순 정렬함수
+void descending(void); //내림차순 정렬함수
+void swap(int); //문자열 순서 변경
 int main(void)
 {
 	printf("BUBBLE SORT \n \n");
@@ -46,20 +46,25 @@ void printchar(void)// 문자열 출력함수
 void ascending(void) //오름차순 정렬함수
 {
 	int n = 16;
-	while (n > 0)//n-1번 반복
+	while (n > 0)
 	{
-		for (int a = 0; a < (n - 1); a++)//순차적으로 2개씩 비교
+		//1번째와 2번째, 2번째와 3번째,3번째와 4번째, ... (n-1)번째와 n번째 비교
+		//비교가 끝나면 마지막 문자열을 제외하고 다시 비교
+		//n-1번 반복
+		for (int num = 0; num < (n - 1); num++)
 		{
-			for (int b = 0; b < 13; b++)//단어의 문자순서에 따라 비교
+			//비교하는 문자열 중 앞이 더 크면 swap
+			//비교하는 문자열 중 뒤가 더 크면 계속
+			for (int step = 0; step < 13; step++)
 			{
-				if (Arr[a][b] > Arr[a + 1][b]) //앞이 더 크면 swap 후 다음 비교
+				if (Arr[num][step] > Arr[num + 1][step])
 				{
-					swap(a);
+					swap(num);
 					break;
 				}
-				else if (Arr[a][b] == Arr[a + 1][b])//같으면 다음 문자 비교
+				else if (Arr[num][step] == Arr[num + 1][step])
 					continue;
-				else //앞이 더 작으면 다음 비교
+				else
 					break;
 
 			}
@@ -72,20 +77,25 @@ void ascending(void) //오름차순 정렬함수
 void descending(void) //내림차순 정렬함수
 {
 	int n = 16;
-	while (n > 0)//n-1번 반복
+	while (n > 0)
 	{
-		for (int a = 0; a < (n - 1); a++)//순차적으로 2개씩 비교
+		//1번째와 2번째, 2번째와 3번째,3번째와 4번째, ... (n-1)번째와 n번째 비교
+		//비교가 끝나면 마지막 문자열을 제외하고 다시 비교
+		//n-1번 반복
+		for (int num = 0; num < (n - 1); num++)
 		{
-			for (int b = 0; b < 13; b++)//단어의 문자순서에 따라 비교
+			//비교하는 문자열 중 뒤가 더 크면 swap
+			//비교하는 문자열 중 앞이 더 크면 계속
+			for (int step = 0; step < 13; step++)
 			{
-				if (Arr[a][b] < Arr[a + 1][b]) //앞이 더 작으면 swap 후 다음 비교
+				if (Arr[num][step] < Arr[num + 1][step])
 				{
-					swap(a);
+					swap(num);
 					break;
 				}
-				else if (Arr[a][b] == Arr[a + 1][b])//같으면 다음 문자 비교
+				else if (Arr[num][step] == Arr[num + 1][step])
 					continue;
-				else //앞이 더 크면 다음 비교
+				else
 					break;
 
 			}
@@ -95,14 +105,14 @@ void descending(void) //내림차순 정렬함수
 	return;
 }
 
-void swap(int a) //단어 순서 변경
+void swap(int num) //문자열 순서 변경
 {
 	char temp;
-	for (int i = 0; i < 13; i++)
+	for (int step = 0; step < 13; step++)
 	{
-		temp = Arr[a][i];
-		Arr[a][i] = Arr[a + 1][i];
-		Arr[a + 1][i] = temp;
+		temp = Arr[num][step];
+		Arr[num][step] = Arr[num + 1][step];
+		Arr[num + 1][step] = temp;
 	}
 	return;
 }
