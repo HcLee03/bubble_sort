@@ -4,8 +4,9 @@
 
 //전역변수 배열
 char Arr[16][13]= {"Sindang", "Wangsimni", "Ttukseom", "Jamsillaru", "Jamsil", "Samseong", "Yeoksam", "Gangnam", "Seocho", "Nakseongdae", "Bangbae", "Bongcheon", "Dangsan", "Hapjeong", "Ahyeon", "Chungjeongno"};
-
+char StringArr[16][13];
 void printchar(void);//문자열 출력
+void intchar(void);//StringArr에 전역변수 배열 가져옴
 void ascending(void); //오름차순 정렬함수
 void descending(void); //내림차순 정렬함수
 void swap(int); //문자열 순서 변경
@@ -14,6 +15,7 @@ int main(void)
 	printf("BUBBLE SORT \n \n");
 	printf("------------------------------------------ \n");
 	printf("[Input string] : ");
+	intchar();//StringArr에 전역변수 배열 가져옴
 	printchar(); //문자열 출력
 	printf("[Ascending order] : ");
 	ascending(); //오름차순 정렬
@@ -30,13 +32,20 @@ int main(void)
 		c = getchar();
 	return 0;
 }
-
-
-void printchar(void)// 문자열 출력함수
+void intchar(void)//StringArr에 전역변수 배열 가져옴
+{
+	for (int num = 0; num < 16; num++)
+	{
+		for (int step = 0; step < 13; step++)
+			StringArr[num][step] = Arr[num][step];
+	}
+	return;
+}
+void printchar(void)//문자열 출력함수
 {
 	for (int i = 0; i < 16; i++)
 	{
-		printf("%s", Arr[i]);
+		printf("%s", StringArr[i]);
 		if (i < 15)
 			printf(", ");
 		else
@@ -45,6 +54,7 @@ void printchar(void)// 문자열 출력함수
 }
 void ascending(void) //오름차순 정렬함수
 {
+	intchar();//정렬할 배열 가져옴
 	int n = 16;
 	while (n > 0)
 	{
@@ -57,12 +67,12 @@ void ascending(void) //오름차순 정렬함수
 			//비교하는 문자열 중 뒤가 더 크면 계속
 			for (int step = 0; step < 13; step++)
 			{
-				if (Arr[num][step] > Arr[num + 1][step])
+				if (StringArr[num][step] > StringArr[num + 1][step])
 				{
 					swap(num);
 					break;
 				}
-				else if (Arr[num][step] == Arr[num + 1][step])
+				else if (StringArr[num][step] == StringArr[num + 1][step])
 					continue;
 				else
 					break;
@@ -76,6 +86,7 @@ void ascending(void) //오름차순 정렬함수
 
 void descending(void) //내림차순 정렬함수
 {
+	intchar();//정렬할 배열 가져옴
 	int n = 16;
 	while (n > 0)
 	{
@@ -88,12 +99,12 @@ void descending(void) //내림차순 정렬함수
 			//비교하는 문자열 중 앞이 더 크면 계속
 			for (int step = 0; step < 13; step++)
 			{
-				if (Arr[num][step] < Arr[num + 1][step])
+				if (StringArr[num][step] < StringArr[num + 1][step])
 				{
 					swap(num);
 					break;
 				}
-				else if (Arr[num][step] == Arr[num + 1][step])
+				else if (StringArr[num][step] == StringArr[num + 1][step])
 					continue;
 				else
 					break;
@@ -110,9 +121,9 @@ void swap(int num) //문자열 순서 변경
 	char temp;
 	for (int step = 0; step < 13; step++)
 	{
-		temp = Arr[num][step];
-		Arr[num][step] = Arr[num + 1][step];
-		Arr[num + 1][step] = temp;
+		temp = StringArr[num][step];
+		StringArr[num][step] = StringArr[num + 1][step];
+		StringArr[num + 1][step] = temp;
 	}
 	return;
 }
